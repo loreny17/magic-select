@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magic Select — Selecione qualquer coisa na tela. Traduza, pesquise, pergunte.</title>
+<meta name="description" content="Segure o botão direito do mouse, arraste sobre qualquer coisa e traduza, pesquise ou pergunte à IA. Grátis para Windows.">
+<meta property="og:title" content="Magic Select">
+<meta property="og:description" content="Selecione qualquer coisa na tela. Traduza, pesquise, pergunte. Grátis para Windows.">
+<meta property="og:image" content="img/hero.png">
+<link rel="icon" href="img/logo.png">
+<style>
+  :root {
+    --bg: #131417; --card: #1e1f23; --line: #2e3036; --text: #e8eaed; --muted: #9aa0a6;
+    --accent: #8ab4f8; --grad: linear-gradient(135deg, #4285f4, #9650f0);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  a { color: var(--accent); text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 19px; color: var(--text); }
+  .brand img { width: 32px; height: 32px; }
+  nav .links a { color: var(--muted); margin-left: 24px; font-size: 15px; }
+  nav .links a:hover { color: var(--text); }
+
+  .hero { text-align: center; padding: 56px 0 32px; }
+  .hero h1 { font-size: clamp(34px, 6vw, 58px); line-height: 1.1; margin: 0 0 18px; letter-spacing: -0.02em; }
+  .hero h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--muted); font-size: 20px; max-width: 640px; margin: 0 auto 32px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; border-radius: 999px; font-weight: 600; font-size: 17px; }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 30px rgba(110, 100, 240, .35); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { color: var(--text); border: 1px solid var(--line); margin-left: 10px; }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 14px; }
+  .shot { margin: 48px auto 0; max-width: 900px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .shot img { display: block; width: 100%; }
+
+  section { padding: 72px 0 16px; }
+  h2 { font-size: 32px; text-align: center; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .sub { text-align: center; color: var(--muted); max-width: 620px; margin: 0 auto 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .feature { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .feature .ico { font-size: 26px; }
+  .feature h3 { margin: 10px 0 6px; font-size: 18px; }
+  .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .split img { width: 100%; border-radius: 14px; border: 1px solid var(--line); }
+  .split h2, .split .sub { text-align: left; margin-left: 0; }
+  .say { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 10px 0; font-size: 15px; }
+  .say b { color: var(--accent); font-weight: 500; }
+
+  .steps { counter-reset: s; max-width: 680px; margin: 0 auto; }
+  .step { display: flex; gap: 16px; margin-bottom: 18px; }
+  .step::before { counter-increment: s; content: counter(s); flex: 0 0 34px; height: 34px; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; display: grid; place-items: center; }
+  .step p { margin: 4px 0 0; }
+  .note { color: var(--muted); font-size: 14px; }
+
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 10px auto; max-width: 760px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--muted); margin: 10px 0 0; }
+
+  .cta { text-align: center; padding: 80px 0; }
+  footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; padding: 28px 0 40px; text-align: center; }
+
+  @media (max-width: 760px) {
+    .split { grid-template-columns: 1fr; }
+    nav .links { display: none; }
+    .btn-ghost { margin: 12px 0 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><img src="img/logo.png" alt="">Magic Select</a>
+    <div class="links">
+      <a href="#recursos">Recursos</a>
+      <a href="#voz">Voz</a>
+      <a href="#instalar">Instalar</a>
+      <a href="https://github.com/loreny17/magic-select">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Selecione qualquer coisa.<br><span>Traduza, pesquise, pergunte.</span></h1>
+    <p>Segure o botão direito do mouse e arraste sobre qualquer coisa na tela. A IA faz o resto.</p>
+    <a class="btn btn-primary" href="https://github.com/loreny17/magic-select/releases/latest/download/MagicSelect-Setup.exe">⬇&nbsp; Baixar para Windows</a>
+    <a class="btn btn-ghost" href="#recursos">Ver como funciona</a>
+    <div class="meta">Grátis · Windows 10 e 11 · Versão 1.0.0</div>
+    <div class="shot"><img src="img/hero.png" alt="Texto em inglês selecionado e o cartão do Magic Select traduzindo para português"></div>
+  </header>
+
+  <section id="recursos">
+    <h2>Tudo a um arrasto de distância</h2>
+    <p class="sub">Funciona em qualquer lugar: sites, PDFs, imagens, vídeos, jogos e programas. Um clique normal com o botão direito continua igual.</p>
+    <div class="grid">
+      <div class="feature"><div class="ico">🌐</div><h3>Traduzir</h3><p>Traduz o texto da área selecionada, até de imagens e vídeos.</p></div>
+      <div class="feature"><div class="ico">🔍</div><h3>Pesquisar</h3><p>A IA monta a pesquisa certa e abre o Google para você.</p></div>
+      <div class="feature"><div class="ico">💬</div><h3>Perguntar</h3><p>Pergunte qualquer coisa sobre o que você selecionou e continue a conversa.</p></div>
+      <div class="feature"><div class="ico">📋</div><h3>Copiar texto</h3><p>Lê o texto de imagens e prints e copia na hora.</p></div>
+      <div class="feature"><div class="ico">📷</div><h3>Print</h3><p>Copia só a área selecionada e salva em Imagens.</p></div>
+      <div class="feature"><div class="ico">🔊</div><h3>Ler em voz alta</h3><p>Ouça qualquer texto com a voz do Windows.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="split">
+      <div>
+        <h2>Ações inteligentes</h2>
+        <p class="sub">O Magic Select percebe o que você selecionou e mostra o atalho certo: ver um endereço no Maps, abrir um link,
+          mandar e-mail, chamar no WhatsApp, fazer uma conta ou converter dólar e euro para real com a cotação do dia.</p>
+      </div>
+      <img src="img/acoes-inteligentes.png" alt="Ações inteligentes no cartão">
+    </div>
+  </section>
+
+  <section id="voz">
+    <div class="split">
+      <img src="img/microfone.png" alt="Escolha do botão do microfone">
+      <div>
+        <h2>Fale com o seu PC 🎤</h2>
+        <p class="sub">Segure o botão que você escolher (uma tecla ou um botão lateral do mouse), fale e solte.</p>
+        <div class="say"><b>"toca Evidências no YouTube"</b> → o vídeo abre tocando</div>
+        <div class="say"><b>"abre a Steam"</b> → abre o programa instalado</div>
+        <div class="say"><b>"pesquisa previsão do tempo"</b> → pesquisa no Google</div>
+        <p class="note">🎮 Jogando em tela cheia? O Magic Select se desliga sozinho.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <h2>Instale em 1 minuto</h2>
+    <p class="sub">Não precisa ser administrador.</p>
+    <div class="steps">
+      <div class="step"><div><b>Baixe e abra o instalador</b><p class="note">Se aparecer "O Windows protegeu o computador", clique em <b>Mais informações › Executar assim mesmo</b>. Isso acontece com programas novos que ainda não têm assinatura digital.</p></div></div>
+      <div class="step"><div><b>Clique em Instalar</b><p class="note">Ele fica pronto perto do relógio e abre junto com o Windows.</p></div></div>
+      <div class="step"><div><b>Conecte a IA grátis</b><p class="note">O guia de boas-vindas ajuda você a criar sua chave gratuita do Google Gemini e a escolher o botão do microfone.</p></div></div>
+    </div>
+    <div class="grid" style="margin-top:36px">
+      <img src="img/instalador.png" alt="Instalador" style="width:100%;border-radius:14px;border:1px solid var(--line)">
+      <img src="img/boas-vindas.png" alt="Boas-vindas" style="width:100%;border-radius:14px;border:1px solid var(--line)">
+    </div>
+  </section>
+
+  <section>
+    <h2>Perguntas frequentes</h2>
+    <p class="sub"></p>
+    <details><summary>É grátis mesmo?</summary><p>Sim. A IA usada é o Google Gemini, que tem plano gratuito. Cada pessoa usa a própria chave, criada em aistudio.google.com/apikey.</p></details>
+    <details><summary>Meus dados vão para algum lugar?</summary><p>Sua chave fica só no seu PC, criptografada pelo Windows. A área selecionada é enviada ao Google Gemini quando você usa uma ação ou faz uma pergunta. Com as ações inteligentes ligadas, ela é enviada assim que o cartão abre (dá para desligar). No comando de voz, o áudio gravado enquanto você segura o botão vai para o Gemini. O Magic Select não tem servidor próprio e não coleta nada.</p></details>
+    <details><summary>O antivírus reclamou. É seguro?</summary><p>O programa observa o mouse para perceber o arrasto com o botão direito, e alguns antivírus desconfiam disso em programas novos. O código está todo no GitHub.</p></details>
+    <details><summary>Como desinstalar?</summary><p>Configurações do Windows › Aplicativos › Magic Select › Desinstalar.</p></details>
+  </section>
+
+  <div class="cta">
+    <h2>Experimente agora</h2>
+    <p class="sub">Grátis para Windows 10 e 11.</p>
+    <a class="btn btn-primary" href="https://github.com/loreny17/magic-select/releases/latest/download/MagicSelect-Setup.exe">⬇&nbsp; Baixar o Magic Select</a>
+  </div>
+</div>
+<footer>© 2026 loreny17 · <a href="https://github.com/loreny17/magic-select">Código no GitHub</a></footer>
+</body>
+</html>

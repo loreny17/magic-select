@@ -1,0 +1,5 @@
+# Build output (the installer is published in Releases, not in the repo)
+bin/
+dist/
+*.exe
+*.log
