@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -22,6 +23,15 @@ namespace MagicSelect
             "Responda somente com o texto, sem comentários nem formatação Markdown. Se não houver texto, responda apenas: (sem texto)";
 
         string readText;
+
+        // ---------- Histórico de cópias ----------
+
+        void OpenHistory()
+        {
+            Point at = Location;
+            Close();
+            app.ShowHistory(at);
+        }
 
         // ---------- Ler em voz alta ----------
 

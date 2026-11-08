@@ -7,15 +7,15 @@ using System.Reflection;
 [assembly: AssemblyProduct("Magic Select")]
 [assembly: AssemblyCompany("Magic Select")]
 [assembly: AssemblyCopyright("© 2026 Magic Select")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 
 namespace MagicSelect
 {
     static class Brand
     {
         public const string Name = "Magic Select";
-        public const string Version = "1.0.0";
+        public const string Version = "1.1.0";
         public const string Tagline = "Selecione qualquer coisa na tela. Traduza, pesquise, pergunte.";
 
         /// <summary>The app icon (embedded resource "app.ico") at the requested size.</summary>

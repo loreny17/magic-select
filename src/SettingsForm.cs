@@ -12,7 +12,7 @@ namespace MagicSelect
         readonly VoiceCommands voice;
         readonly Panel content;
         readonly TextField keyField, modelField, langField, excludedField;
-        readonly ToggleSwitch enabledSw, smartSw, gameSw, startupSw;
+        readonly ToggleSwitch enabledSw, smartSw, gameSw, startupSw, historySw;
         readonly Label keyStatus, micLabel;
         int pendingKey, pendingMods;
         string pendingMouse;
@@ -135,6 +135,7 @@ namespace MagicSelect
             var gen = new CardPanel();
             cy = S(6);
             startupSw = ToggleRow(gen, ref cy, inner, "Iniciar junto com o Windows", "Fica pronto perto do relógio assim que você liga o PC.", Config.StartsWithWindows);
+            historySw = ToggleRow(gen, ref cy, inner, "Histórico de cópias", "Guarda o que você copia (Ctrl+C) para usar de novo. Senhas de gerenciadores de senha não são guardadas.", cfg.ClipboardHistory);
             cy += S(6);
             gen.SetBounds(pad, y, cw, cy);
             content.Controls.Add(gen);
@@ -248,6 +249,7 @@ namespace MagicSelect
             cfg.ExcludedApps = excludedField.Value.Trim();
             cfg.Enabled = enabledSw.Checked;
             cfg.SmartActions = smartSw.Checked;
+            cfg.ClipboardHistory = historySw.Checked;
             cfg.DisableInFullscreen = gameSw.Checked;
             cfg.VoiceKey = pendingKey;
             cfg.VoiceModifiers = pendingMods;

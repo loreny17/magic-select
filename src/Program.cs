@@ -105,6 +105,11 @@ namespace MagicSelect
             menu.Items.Add(enabledItem);
             menu.Items.Add("🎤  Falar um comando", null, delegate { voice.Toggle(); });
             menu.Items.Add("⚙  Configurações", null, delegate { ShowSettings(); });
+            menu.Items.Add("📋  Histórico de cópias", null, delegate
+            {
+                Rectangle wa = Screen.FromPoint(Cursor.Position).WorkingArea;
+                ShowHistory(new Point(wa.Right, wa.Bottom)); // bottom-right, next to the tray
+            });
             menu.Items.Add("❔  Como usar", null, delegate { ShowWelcome(false); });
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("Sair", null, delegate { ExitThread(); });
@@ -118,6 +123,8 @@ namespace MagicSelect
             tray.MouseClick += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Left) voice.Toggle(); };
             voice = new VoiceCommands(this, cfg);
             AppIndex.RefreshAsync();
+            clips = new ClipboardHistory();
+            if (cfg.ClipboardHistory) clips.Start();
 
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 2 && args[1] == "--voice-test")
@@ -246,6 +253,7 @@ namespace MagicSelect
             settings.FormClosed += delegate
             {
                 settings = null;
+                if (cfg.ClipboardHistory) clips.Start(); else clips.Stop();
                 hook.ClearCache();
                 enabledItem.Checked = cfg.Enabled;
                 if (!voice.ApplyTrigger())
@@ -254,6 +262,19 @@ namespace MagicSelect
             };
             settings.Show();
             Native.ForceForeground(settings.Handle);
+        }
+
+        ClipboardHistory clips;
+        HistoryForm historyForm;
+
+        public void ShowHistory(Point anchor)
+        {
+            if (historyForm != null && !historyForm.IsDisposed) { historyForm.Activate(); return; }
+            historyForm = new HistoryForm(clips, anchor);
+            historyForm.FormClosed += delegate { historyForm = null; };
+            historyForm.Show();
+            Native.ForceForeground(historyForm.Handle);
+            historyForm.Activate();
         }
 
         WelcomeForm welcome;
@@ -270,6 +291,7 @@ namespace MagicSelect
         protected override void ExitThreadCore()
         {
             hook.Dispose();
+            clips.Dispose(); // also saves the text history
             voice.Dispose();
             if (card != null) card.Close();
             tray.Visible = false;

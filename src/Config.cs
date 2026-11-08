@@ -20,6 +20,7 @@ namespace MagicSelect
         public bool DisableInFullscreen { get; set; }
         public bool SmartActions { get; set; }
         public bool WelcomeShown { get; set; }
+        public bool ClipboardHistory { get; set; }
 
         // Microphone button: either a keyboard key (+ modifiers) or a mouse button ("Middle", "X1", "X2").
         public int VoiceKey { get; set; }
@@ -29,6 +30,7 @@ namespace MagicSelect
         public Config()
         {
             SmartActions = true;
+            ClipboardHistory = true;
             VoiceKey = 0x20;                                   // Space
             VoiceModifiers = VoiceTrigger.ModCtrl | VoiceTrigger.ModShift;
             VoiceMouse = "";

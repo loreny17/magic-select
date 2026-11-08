@@ -36,6 +36,15 @@ Ao soltar, aparece um cartão em cima da seleção:
 | 📋 **Copiar texto** | Lê o texto de imagens e copia (OCR) |
 | 📷 **Print** | Copia só a área selecionada e salva em `Imagens\Magic Select` |
 | 🔊 **Ler em voz alta** | Lê o texto com a voz do Windows |
+| 🕘 **Histórico de cópias** | Tudo que você copia no PC (textos, imagens, arquivos) fica guardado; clique para copiar de novo |
+
+### Histórico de cópias
+
+O Magic Select guarda o que você copia (Ctrl+C) em qualquer programa: **textos, links, imagens e arquivos**.
+Abra pelo ícone 🕘 no cartão ou pelo menu do ícone perto do relógio, **busque** e **clique para copiar de novo**.
+Senhas copiadas de gerenciadores de senha não são guardadas, e o histórico de textos fica salvo criptografado no seu PC.
+
+<p align="center"><img src="docs/img/historico.png" width="380" alt="Janela do histórico de cópias com textos, arquivos e uma imagem"></p>
 
 Um clique normal com o botão direito continua abrindo o menu de sempre.
 

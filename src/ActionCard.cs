@@ -83,6 +83,7 @@ namespace MagicSelect
             AddAction("", "Print (copiar imagem)", TakePrint, true);
 
             speakBtn = AddAction(IconSpeak, "Ler em voz alta", ReadAloud, true);
+            AddAction("", "Histórico de cópias", OpenHistory, true);
 
             inputShell = new InputShell();
             input = new TextBox();
